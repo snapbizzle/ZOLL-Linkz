@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generate QR Code Flyer</title>
+  </head>
+  <body>
+    <h1>Generate QR Code Flyer</h1>
+    <input
+      type="url"
+      id="urlInput"
+      placeholder="HighSpot Link Pitch URL"
+      required
+    />
+    <button id="generateBtn">Generate Flyer</button>
+    <button id="downloadBtn" style="display: none">Download Flyer</button>
+    <br /><br />
+    <canvas id="flyerCanvas"></canvas>
+    <script src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
