@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create your R Series resource pitch!</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+      }
+      button {
+        font-size: 18px;
+        padding: 10px 20px;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Create your R Series resource pitch!</h1>
+    <button id="alsVideoBtn">R Series ALS Video Resources</button>
+    <button id="alsBioMedBtn">R Series ALS BioMed Resources</button>
+    <button id="alsTestingBtn">R Series ALS Testing Resources</button>
+    <button id="alsEducationBtn">R Series ALS Education Resources</button>
+    <button id="alsGenericBtn">R Series ALS "Generic" Resource Link</button>
+    <script>
+      document.getElementById("alsVideoBtn").addEventListener("click", () => {
+        window.location.href = "flyer.html?type=rseries-als-video";
+      });
+      document.getElementById("alsBioMedBtn").addEventListener("click", () => {
+        window.location.href = "flyer.html?type=rseries-als-biomed";
+      });
+      document.getElementById("alsTestingBtn").addEventListener("click", () => {
+        window.location.href = "flyer.html?type=rseries-als-testing";
+      });
+      document
+        .getElementById("alsEducationBtn")
+        .addEventListener("click", () => {
+          window.location.href = "flyer.html?type=rseries-als-education";
+        });
+      document.getElementById("alsGenericBtn").addEventListener("click", () => {
+        window.location.href = "flyer.html?type=rseries-als-resourcelink";
+      });
+    </script>
+  </body>
+</html>

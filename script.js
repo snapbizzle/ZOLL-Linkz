@@ -31,7 +31,7 @@ const type = getUrlParameter("type");
 if (!type) {
   alert("Invalid access. Please navigate from the resource page.");
 } else {
-  bgImage.src = "./" + type + ".png";
+  bgImage.src = "./images/" + type + ".png";
   bgImage.onload = () => {
     // Background image loaded
   };

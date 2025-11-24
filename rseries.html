@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create your R Series resource pitch!</title>
+    <title>R Series Pitches</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -18,15 +18,15 @@
     </style>
   </head>
   <body>
-    <h1>Create your R Series resource pitch!</h1>
-    <button id="alsVideoBtn">R Series ALS Video Resources</button>
-    <button id="alsBioMedBtn">R Series ALS BioMed Resources</button>
+    <h1>Choose the R Series model:</h1>
+    <button id="alsBtn">R Series ALS</button>
+    <button id="plusBtn">R Series PLUS</button>
     <script>
-      document.getElementById("alsVideoBtn").addEventListener("click", () => {
-        window.location.href = "flyer.html?type=rseries-als-video";
+      document.getElementById("alsBtn").addEventListener("click", () => {
+        window.location.href = "rseries-als.html";
       });
-      document.getElementById("alsBioMedBtn").addEventListener("click", () => {
-        window.location.href = "flyer.html?type=rseries-als-biomed";
+      document.getElementById("plusBtn").addEventListener("click", () => {
+        window.location.href = "rseries-plus.html";
       });
     </script>
   </body>
