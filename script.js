@@ -1,7 +1,7 @@
 // Constants for dimensions (mm to px conversion at 96 DPI, rounded to integers)
 const MM_TO_PX = 96 / 25.4; // ≈3.7795
-const BG_WIDTH_PX = Math.round(268.05 * MM_TO_PX); // 1014
-const BG_HEIGHT_PX = Math.round(215.65 * MM_TO_PX); // 815
+const BG_WIDTH_PX = 650;
+const BG_HEIGHT_PX = 522;
 
 // Get elements
 const urlInput = document.getElementById("urlInput");
@@ -90,33 +90,33 @@ if (!type) {
   alert("Invalid access. Please navigate from the resource page.");
 } else {
   if (type.startsWith("autopulsenxt")) {
-    QR_SIZE_PX = Math.round(110 * MM_TO_PX); // 110mm for AutoPulseNXT
-    QR_X_PX = Math.round(116.54 * MM_TO_PX);
-    QR_Y_PX = Math.round(67.71 * MM_TO_PX);
+    QR_SIZE_PX = 267;
+    QR_X_PX = 283;
+    QR_Y_PX = 164;
   } else if (type.startsWith("xseries")) {
-    QR_SIZE_PX = Math.round(110 * MM_TO_PX); // 110mm for X Series
-    QR_X_PX = Math.round(141.99 * MM_TO_PX);
-    QR_Y_PX = Math.round(78.96 * MM_TO_PX);
+    QR_SIZE_PX = 267;
+    QR_X_PX = 344;
+    QR_Y_PX = 191;
   } else if (type.startsWith("rseries-plus")) {
-    QR_SIZE_PX = Math.round(105 * MM_TO_PX); // 105mm for PLUS
-    QR_X_PX = Math.round(16.62 * MM_TO_PX);
-    QR_Y_PX = Math.round(94.56 * MM_TO_PX);
+    QR_SIZE_PX = 255;
+    QR_X_PX = 40;
+    QR_Y_PX = 229;
   } else if (type.startsWith("internalpaddles")) {
-    QR_SIZE_PX = Math.round(110 * MM_TO_PX); // 110mm for Internal Paddles
-    QR_X_PX = Math.round(124.08 * MM_TO_PX);
-    QR_Y_PX = Math.round(85.65 * MM_TO_PX);
+    QR_SIZE_PX = 267;
+    QR_X_PX = 301;
+    QR_Y_PX = 208;
   } else if (type.startsWith("aed3bls")) {
-    QR_SIZE_PX = Math.round(110 * MM_TO_PX); // 110mm for AED 3 BLS
-    QR_X_PX = Math.round(128.65 * MM_TO_PX);
-    QR_Y_PX = Math.round(66.89 * MM_TO_PX);
+    QR_SIZE_PX = 267;
+    QR_X_PX = 312;
+    QR_Y_PX = 162;
   } else if (type.startsWith("aedplus")) {
-    QR_SIZE_PX = Math.round(110 * MM_TO_PX); // 110mm for AED Plus
-    QR_X_PX = Math.round(128.68 * MM_TO_PX);
-    QR_Y_PX = Math.round(71.74 * MM_TO_PX);
+    QR_SIZE_PX = 267;
+    QR_X_PX = 312;
+    QR_Y_PX = 174;
   } else {
-    QR_SIZE_PX = Math.round(110 * MM_TO_PX); // 110mm for ALS
-    QR_X_PX = Math.round(146.78 * MM_TO_PX);
-    QR_Y_PX = Math.round(79.69 * MM_TO_PX);
+    QR_SIZE_PX = 267;
+    QR_X_PX = 356;
+    QR_Y_PX = 193;
   }
 
   bgImage.src = "./images/" + type + ".png";
@@ -166,21 +166,28 @@ generateBtn.addEventListener("click", () => {
   qrCanvas.height = QR_SIZE_PX;
   const ctxQr = qrCanvas.getContext("2d");
   const scale = QR_SIZE_PX / size;
-  ctxQr.fillStyle = "#FFFFFF";
-  ctxQr.fillRect(0, 0, QR_SIZE_PX, QR_SIZE_PX);
-  ctxQr.fillStyle = "#000000";
+  const imageData = ctxQr.createImageData(QR_SIZE_PX, QR_SIZE_PX);
+  const data = imageData.data;
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
-      if (qr.isDark(y, x)) {
-        ctxQr.fillRect(
-          Math.round(x * scale),
-          Math.round(y * scale),
-          Math.round(scale),
-          Math.round(scale)
-        );
+      const isDark = qr.isDark(y, x);
+      const color = isDark ? 0 : 255;
+      for (let dy = 0; dy < scale; dy++) {
+        for (let dx = 0; dx < scale; dx++) {
+          const px = Math.floor(x * scale + dx);
+          const py = Math.floor(y * scale + dy);
+          if (px < QR_SIZE_PX && py < QR_SIZE_PX) {
+            const index = (py * QR_SIZE_PX + px) * 4;
+            data[index] = color;
+            data[index + 1] = color;
+            data[index + 2] = color;
+            data[index + 3] = 255;
+          }
+        }
       }
     }
   }
+  ctxQr.putImageData(imageData, 0, 0);
 
   // Clear and draw background
   ctx.clearRect(0, 0, BG_WIDTH_PX, BG_HEIGHT_PX);
@@ -188,6 +195,8 @@ generateBtn.addEventListener("click", () => {
   // Draw white background for QR area to avoid lines from background showing through
   ctx.fillStyle = "white";
   ctx.fillRect(QR_X_PX, QR_Y_PX, QR_SIZE_PX, QR_SIZE_PX);
+  // Disable smoothing for crisp QR
+  ctx.imageSmoothingEnabled = false;
   // Overlay QR code on top
   ctx.drawImage(qrCanvas, QR_X_PX, QR_Y_PX);
   // Show download button
