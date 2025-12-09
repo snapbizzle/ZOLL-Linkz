@@ -107,9 +107,13 @@ button:focus {
 /* Typography */
 h1 {
   font-size: 2.5rem;
-  margin-top: 50px;
+  margin-top: 10px;
   margin-bottom: 0px;
   color: var(--text-color);
+}
+
+.flyer-title {
+  margin-top: 0px;
 }
 
 h2 {
@@ -143,7 +147,7 @@ input[type="url"]:focus {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  margin: 8px 0;
+  margin: 0 0 8px 0;
 }
 
 #generateBtn,
@@ -156,7 +160,7 @@ input[type="url"]:focus {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 0 auto;
+  margin: 25px auto 0;
 }
 
 /* Responsive Design */

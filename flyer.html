@@ -12,13 +12,16 @@
     </header>
 
     <nav class="breadcrumb" id="breadcrumb"></nav>
-    <h1>Enter your HighSpot pitch/link:</h1>
-    <input type="url" id="urlInput" placeholder="www.example.com" required />
+    <input
+      type="url"
+      id="urlInput"
+      placeholder="Enter HighSpot Pitch URL Here!"
+      required
+    />
     <div class="button-container">
       <button id="generateBtn">Generate Flyer</button>
       <button id="downloadBtn" style="display: none">Download Flyer</button>
     </div>
-    <br /><br />
     <canvas id="flyerCanvas"></canvas>
     <script src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
     <script src="script.js"></script>
