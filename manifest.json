@@ -1,0 +1,23 @@
+{
+  "name": "ZOLL-Linkz Pitch Generator",
+  "short_name": "ZOLL-Linkz",
+  "description": "Generate QR code flyers for ZOLL product resources",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "logo-zoll-w.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo-zoll-w.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

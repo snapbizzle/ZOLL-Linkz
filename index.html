@@ -3,15 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pitch Resource Generator</title>
+    <title>ZOLL-Linkz Pitch Generator</title>
+    <meta
+      name="description"
+      content="Generate QR code flyers for ZOLL product resources"
+    />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="apple-touch-icon" href="logo-zoll-w.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="header">
       <img src="logo-zoll-w.png" alt="ZOLL Logo" class="header-logo" />
+      <button id="install-btn" class="install-btn">📱 Install the App!</button>
     </header>
     <h1>Welcome to ZOLL-Linkz!</h1>
     <h2>A quick utility to style your HighSpot pitches/links</h2>
+    <div class="guidance-box">
+      <div class="guidance-header">ℹ️ How to Use ZOLL-Linkz</div>
+      <ol>
+        <li>Select the ZOLL product you created a pitch for</li>
+        <li>
+          Choose the type of resource pitch you created (Education, BioMed,
+          etc.)
+        </li>
+        <li>
+          Paste your HighSpot "Link Pitch" url into the box and press "Generate
+          Flyer"
+        </li>
+        <li>Download flyer image and send to customer!</li>
+      </ol>
+    </div>
     <button id="rseriesAlsBtn">R Series ALS</button>
     <button id="rseriesPlusBtn">R Series PLUS</button>
     <button id="xseriesBtn">X Series Pitches</button>
@@ -48,5 +71,6 @@
           window.location.href = "accessories.html";
         });
     </script>
+    <script src="pwa.js"></script>
   </body>
 </html>
