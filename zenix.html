@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create your Zenix resource pitch!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <img src="logo-zoll-w.png" alt="ZOLL Logo" class="header-logo" />
+    </header>
+    <nav class="breadcrumb"><a href="index.html">Home</a> > Zenix</nav>
+    <h1>Choose the Flyer/Pitch Type:</h1>
+    <button id="zenixGeneralBtn">General Resource Pitch</button>
+    <script>
+      document.getElementById("zenixGeneralBtn").addEventListener("click", () => {
+        window.location.href = "flyer.html?type=zenix-resourcelink";
+      });
+    </script>
+    <script src="pwa.js"></script>
+  </body>
+</html>

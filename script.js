@@ -2,6 +2,8 @@
 const MM_TO_PX = 96 / 25.4; // ≈3.7795
 const BG_WIDTH_PX = 650;
 const BG_HEIGHT_PX = 522;
+let canvasWidthPx = BG_WIDTH_PX;
+let canvasHeightPx = BG_HEIGHT_PX;
 
 // Get elements
 const urlInput = document.getElementById("urlInput");
@@ -65,6 +67,9 @@ function getBreadcrumbFromType(type) {
   } else if (type.startsWith("aedplus")) {
     category = "AED Plus";
     page = "aedplus.html";
+  } else if (type.startsWith("zenix")) {
+    category = "Zenix";
+    page = "zenix.html";
   } else {
     // default to accessories
     category = "Accessories & Consumables";
@@ -113,6 +118,14 @@ if (!type) {
     QR_SIZE_PX = 267;
     QR_X_PX = 312;
     QR_Y_PX = 174;
+  } else if (type.startsWith("zenix")) {
+    canvasWidthPx = 2000;
+    canvasHeightPx = 1608;
+    flyerCanvas.width = canvasWidthPx;
+    flyerCanvas.height = canvasHeightPx;
+    QR_SIZE_PX = Math.round(110 * MM_TO_PX);
+    QR_X_PX = Math.round(147 * MM_TO_PX);
+    QR_Y_PX = Math.round(80 * MM_TO_PX);
   } else {
     QR_SIZE_PX = 267;
     QR_X_PX = 356;
@@ -190,8 +203,8 @@ generateBtn.addEventListener("click", () => {
   ctxQr.putImageData(imageData, 0, 0);
 
   // Clear and draw background
-  ctx.clearRect(0, 0, BG_WIDTH_PX, BG_HEIGHT_PX);
-  ctx.drawImage(bgImage, 0, 0, BG_WIDTH_PX, BG_HEIGHT_PX);
+  ctx.clearRect(0, 0, canvasWidthPx, canvasHeightPx);
+  ctx.drawImage(bgImage, 0, 0, canvasWidthPx, canvasHeightPx);
   // Draw white background for QR area to avoid lines from background showing through
   ctx.fillStyle = "white";
   ctx.fillRect(QR_X_PX, QR_Y_PX, QR_SIZE_PX, QR_SIZE_PX);
