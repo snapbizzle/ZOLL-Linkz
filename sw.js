@@ -1,6 +1,6 @@
 // Service Worker for ZOLL-Linkz PWA
-const CACHE_NAME = "zoll-linkz-v1";
-const STATIC_CACHE_NAME = "zoll-linkz-static-v1";
+const CACHE_NAME = "zoll-linkz-v2";
+const STATIC_CACHE_NAME = "zoll-linkz-static-v2";
 
 // Assets to cache immediately
 const STATIC_ASSETS = [

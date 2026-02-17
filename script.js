@@ -119,13 +119,12 @@ if (!type) {
     QR_X_PX = 312;
     QR_Y_PX = 174;
   } else if (type.startsWith("zenix")) {
-    canvasWidthPx = 2000;
-    canvasHeightPx = 1608;
-    flyerCanvas.width = canvasWidthPx;
-    flyerCanvas.height = canvasHeightPx;
-    QR_SIZE_PX = Math.round(110 * MM_TO_PX);
-    QR_X_PX = Math.round(147 * MM_TO_PX);
-    QR_Y_PX = Math.round(80 * MM_TO_PX);
+    // Zenix uses 2000x1608 template, but we scale to 650x522 canvas like other flyers
+    // QR code: 110mm x 110mm at position 147mm, 80mm in the template
+    // Scale factor: 650/2000 = 0.325
+    QR_SIZE_PX = 135;
+    QR_X_PX = 181;
+    QR_Y_PX = 98;
   } else {
     QR_SIZE_PX = 267;
     QR_X_PX = 356;
