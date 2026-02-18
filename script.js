@@ -12,10 +12,6 @@ const flyerCanvas = document.getElementById("flyerCanvas");
 const ctx = flyerCanvas.getContext("2d");
 const downloadBtn = document.getElementById("downloadBtn");
 
-// Set canvas size (will be updated based on type)
-flyerCanvas.width = canvasWidthPx;
-flyerCanvas.height = canvasHeightPx;
-
 // Function to get URL parameter
 function getUrlParameter(name) {
   const url = new URL(window.location.href);
@@ -127,14 +123,15 @@ if (!type) {
     QR_SIZE_PX = Math.round(110 * MM_TO_PX);  // 110mm = 415px
     QR_X_PX = Math.round(147 * MM_TO_PX);     // 147mm = 555px
     QR_Y_PX = Math.round(80 * MM_TO_PX);      // 80mm = 302px
-    // Update canvas to use full-size template
-    flyerCanvas.width = canvasWidthPx;
-    flyerCanvas.height = canvasHeightPx;
   } else {
     QR_SIZE_PX = 267;
     QR_X_PX = 356;
     QR_Y_PX = 193;
   }
+
+  // Set canvas size based on type configuration
+  flyerCanvas.width = canvasWidthPx;
+  flyerCanvas.height = canvasHeightPx;
 
   bgImage.src = "./images/" + type + ".png";
   bgImage.onload = () => {
