@@ -236,7 +236,7 @@ downloadBtn.addEventListener("click", () => {
 copyBtn.addEventListener("click", async () => {
   // Feature-detect Clipboard API support
   if (!navigator.clipboard?.write || typeof ClipboardItem === "undefined") {
-    alert("Failed to copy image to clipboard. Your browser does not support this feature. Try using a modern browser like Chrome, Edge, or Firefox.");
+    alert("Cannot copy image to clipboard. Your browser does not support this feature. Try using a modern browser like Chrome, Edge, or Firefox.");
     return;
   }
 
@@ -285,6 +285,6 @@ copyBtn.addEventListener("click", async () => {
 });
 
 // If image is already loaded, trigger onload
-if (bgImage.complete && typeof bgImage.onload === "function") {
+if (bgImage.complete && bgImage.onload) {
   bgImage.onload();
 }
