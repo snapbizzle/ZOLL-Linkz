@@ -236,7 +236,7 @@ downloadBtn.addEventListener("click", () => {
 copyBtn.addEventListener("click", async () => {
   // Feature-detect Clipboard API support
   if (!navigator.clipboard?.write || typeof ClipboardItem === "undefined") {
-    alert("Cannot copy image to clipboard. Your browser does not support this feature. Try using a modern browser like Chrome, Edge, or Firefox.");
+    alert("This browser does not support copying images to clipboard. Please use a modern browser like Chrome, Edge, or Firefox.");
     return;
   }
 
