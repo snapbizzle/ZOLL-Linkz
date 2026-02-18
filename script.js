@@ -11,6 +11,7 @@ const generateBtn = document.getElementById("generateBtn");
 const flyerCanvas = document.getElementById("flyerCanvas");
 const ctx = flyerCanvas.getContext("2d");
 const downloadBtn = document.getElementById("downloadBtn");
+const copyBtn = document.getElementById("copyBtn");
 
 // Function to get URL parameter
 function getUrlParameter(name) {
@@ -212,8 +213,9 @@ generateBtn.addEventListener("click", () => {
   ctx.imageSmoothingEnabled = false;
   // Overlay QR code on top
   ctx.drawImage(qrCanvas, QR_X_PX, QR_Y_PX);
-  // Show download button
+  // Show download and copy buttons
   downloadBtn.style.display = "block";
+  copyBtn.style.display = "block";
 });
 
 // Download flyer on button click
@@ -228,6 +230,42 @@ downloadBtn.addEventListener("click", () => {
       URL.revokeObjectURL(url);
     }
   }, "image/png");
+});
+
+// Copy flyer to clipboard for pasting into email
+copyBtn.addEventListener("click", async () => {
+  try {
+    // Convert canvas to blob
+    const blob = await new Promise((resolve) => {
+      flyerCanvas.toBlob(resolve, "image/png");
+    });
+    
+    if (!blob) {
+      alert("Failed to copy image. Please try again.");
+      return;
+    }
+
+    // Copy to clipboard using Clipboard API
+    await navigator.clipboard.write([
+      new ClipboardItem({
+        "image/png": blob
+      })
+    ]);
+
+    // Show success feedback
+    const originalText = copyBtn.textContent;
+    copyBtn.textContent = "Copied!";
+    copyBtn.style.backgroundColor = "#28a745";
+    
+    // Reset button after 2 seconds
+    setTimeout(() => {
+      copyBtn.textContent = originalText;
+      copyBtn.style.backgroundColor = "";
+    }, 2000);
+  } catch (err) {
+    console.error("Failed to copy image:", err);
+    alert("Failed to copy image to clipboard. Your browser may not support this feature.");
+  }
 });
 
 // If image is already loaded, trigger onload
