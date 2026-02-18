@@ -213,6 +213,12 @@ input[type="url"]:focus {
   width: 150px;
 }
 
+#generateBtn:focus,
+#downloadBtn:focus,
+#copyBtn:focus {
+  outline: none;
+}
+
 #copyBtn {
   width: 200px;
 }
