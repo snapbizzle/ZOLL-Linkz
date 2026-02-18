@@ -115,14 +115,13 @@ if (!type) {
     QR_X_PX = 312;
     QR_Y_PX = 174;
   } else if (type.startsWith("zenix")) {
-    // Zenix uses 2000x1608 template at original size (no scaling)
-    // QR code: 110mm x 110mm at position 147mm, 80mm
-    // At 96 DPI: 110mm = 415px, 147mm = 555px, 80mm = 302px
-    canvasWidthPx = 2000;
-    canvasHeightPx = 1608;
-    QR_SIZE_PX = Math.round(110 * MM_TO_PX);  // 110mm = 415px
-    QR_X_PX = Math.round(147 * MM_TO_PX);     // 147mm = 555px
-    QR_Y_PX = Math.round(80 * MM_TO_PX);      // 80mm = 302px
+    // Zenix template: 2000x1608px (189 DPI) represents 268.05x215.65mm
+    // Scaled to 650x522px for display
+    // QR code: 110mm x 110mm at position (147mm, 80mm)
+    // At display scale: 267x267px at (356px, 194px)
+    QR_SIZE_PX = 267;
+    QR_X_PX = 356;
+    QR_Y_PX = 194;
   } else {
     QR_SIZE_PX = 267;
     QR_X_PX = 356;
