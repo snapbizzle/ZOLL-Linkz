@@ -236,7 +236,7 @@ downloadBtn.addEventListener("click", () => {
 copyBtn.addEventListener("click", async () => {
   // Feature-detect Clipboard API support
   if (!navigator.clipboard?.write || typeof ClipboardItem === "undefined") {
-    alert("This browser does not support copying images to clipboard. Please use a modern browser like Chrome, Edge, or Firefox.");
+    alert("This browser does not support copying images to clipboard. Please use a modern browser with clipboard support.");
     return;
   }
 
@@ -276,6 +276,8 @@ copyBtn.addEventListener("click", async () => {
     let errorMessage = "Failed to copy image to clipboard.";
     if (err.name === "NotAllowedError") {
       errorMessage += " Please grant clipboard permissions to use this feature.";
+    } else if (err.name === "NotSupportedError") {
+      errorMessage += " Your browser does not support this feature.";
     } else {
       errorMessage += " Please try again.";
     }
