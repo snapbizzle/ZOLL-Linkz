@@ -232,7 +232,7 @@ downloadBtn.addEventListener("click", () => {
   }, "image/png");
 });
 
-// Copy flyer to clipboard for pasting into email
+// Copy flyer to clipboard
 copyBtn.addEventListener("click", async () => {
   try {
     // Convert canvas to blob
