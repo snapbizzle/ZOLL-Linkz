@@ -207,9 +207,14 @@ input[type="url"]:focus {
 }
 
 #generateBtn,
-#downloadBtn {
+#downloadBtn,
+#copyBtn {
   margin: 0;
   width: 150px;
+}
+
+#copyBtn {
+  width: 200px;
 }
 
 #flyerCanvas {
@@ -269,7 +274,8 @@ input[type="url"]:focus {
     max-width: 280px;
   }
 
-  #downloadBtn {
+  #downloadBtn,
+  #copyBtn {
     margin: 15px auto;
   }
 
@@ -279,7 +285,8 @@ input[type="url"]:focus {
   }
 
   #generateBtn,
-  #downloadBtn {
+  #downloadBtn,
+  #copyBtn {
     width: 100%;
     margin: 5px 0;
   }
