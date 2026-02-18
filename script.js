@@ -234,6 +234,12 @@ downloadBtn.addEventListener("click", () => {
 
 // Copy flyer to clipboard
 copyBtn.addEventListener("click", async () => {
+  // Feature-detect Clipboard API support
+  if (!navigator.clipboard?.write || typeof ClipboardItem === "undefined") {
+    alert("Failed to copy image to clipboard. Your browser does not support this feature. Try using a modern browser like Chrome, Edge, or Firefox.");
+    return;
+  }
+
   try {
     // Convert canvas to blob
     const blob = await new Promise((resolve, reject) => {
@@ -270,8 +276,6 @@ copyBtn.addEventListener("click", async () => {
     let errorMessage = "Failed to copy image to clipboard.";
     if (err.name === "NotAllowedError") {
       errorMessage += " Please grant clipboard permissions to use this feature.";
-    } else if (err.name === "NotSupportedError") {
-      errorMessage += " Your browser does not support this feature. Try using a modern browser like Chrome, Edge, or Firefox.";
     } else {
       errorMessage += " Please try again.";
     }
@@ -281,4 +285,6 @@ copyBtn.addEventListener("click", async () => {
 });
 
 // If image is already loaded, trigger onload
-if (bgImage.complete) bgImage.onload();
+if (bgImage.complete && typeof bgImage.onload === "function") {
+  bgImage.onload();
+}
