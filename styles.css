@@ -211,7 +211,6 @@ input[type="url"]:focus {
 #copyBtn {
   margin: 0;
   width: 180px;
-  text-align: center;
   display: inline-flex;
   align-items: center;
   justify-content: center;
