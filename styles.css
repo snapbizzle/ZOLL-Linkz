@@ -210,17 +210,17 @@ input[type="url"]:focus {
 #downloadBtn,
 #copyBtn {
   margin: 0;
-  width: 150px;
+  width: 180px;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #generateBtn:focus:not(:focus-visible),
 #downloadBtn:focus:not(:focus-visible),
 #copyBtn:focus:not(:focus-visible) {
   outline: none;
-}
-
-#copyBtn {
-  width: 200px;
 }
 
 #flyerCanvas {
