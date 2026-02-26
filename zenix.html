@@ -13,9 +13,21 @@
     <nav class="breadcrumb"><a href="index.html">Home</a> > Zenix</nav>
     <h1>Choose the Flyer/Pitch Type:</h1>
     <button id="zenixGeneralBtn">General Resource Pitch</button>
+    <button id="zenixEducationBtn">Education Pitch</button>
+    <button id="zenixBiomedBtn">BioMed Pitch</button>
+    <button id="zenixConfigurationBtn">Configuration Pitch</button>
     <script>
       document.getElementById("zenixGeneralBtn").addEventListener("click", () => {
         window.location.href = "flyer.html?type=zenix-resourcelink";
+      });
+      document.getElementById("zenixEducationBtn").addEventListener("click", () => {
+        window.location.href = "flyer.html?type=zenix-education";
+      });
+      document.getElementById("zenixBiomedBtn").addEventListener("click", () => {
+        window.location.href = "flyer.html?type=zenix-biomed";
+      });
+      document.getElementById("zenixConfigurationBtn").addEventListener("click", () => {
+        window.location.href = "flyer.html?type=zenix-configuration";
       });
     </script>
     <script src="pwa.js"></script>
