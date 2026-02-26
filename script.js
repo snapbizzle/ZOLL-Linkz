@@ -5,8 +5,8 @@ const BG_HEIGHT_PX = 522;
 let canvasWidthPx = BG_WIDTH_PX;
 let canvasHeightPx = BG_HEIGHT_PX;
 
-// Stores the most recently generated QR canvas for high-res export
-let generatedQrCanvas = null;
+// Stores the most recently generated QR data for high-res export
+let generatedQrData = null;
 
 // Get elements
 const urlInput = document.getElementById("urlInput");
@@ -208,8 +208,8 @@ generateBtn.addEventListener("click", () => {
   }
   ctxQr.putImageData(imageData, 0, 0);
 
-  // Save QR canvas for high-res export
-  generatedQrCanvas = qrCanvas;
+  // Save QR data for high-res export
+  generatedQrData = qr;
 
   // Clear and draw background
   ctx.clearRect(0, 0, canvasWidthPx, canvasHeightPx);
@@ -228,7 +228,7 @@ generateBtn.addEventListener("click", () => {
 
 // Download flyer on button click
 downloadBtn.addEventListener("click", () => {
-  if (!generatedQrCanvas) return;
+  if (!generatedQrData) return;
   const exportCanvas = createExportCanvas();
   exportCanvas.toBlob((blob) => {
     if (blob) {
@@ -254,26 +254,37 @@ function createExportCanvas() {
   // Draw background at native resolution
   exportCtx.drawImage(bgImage, 0, 0, bgImage.naturalWidth, bgImage.naturalHeight);
 
-  if (generatedQrCanvas) {
+  if (generatedQrData) {
     // Scale QR position and size to native resolution
     const exportQrX = Math.round(QR_X_PX * scaleX);
     const exportQrY = Math.round(QR_Y_PX * scaleY);
     // Use average scale for the square QR size to stay proportional
     const exportQrSize = Math.round(QR_SIZE_PX * ((scaleX + scaleY) / 2));
 
+    // Re-render QR directly at export resolution for crisp output
+    const moduleCount = generatedQrData.getModuleCount();
+    const qrExportCanvas = document.createElement("canvas");
+    qrExportCanvas.width = exportQrSize;
+    qrExportCanvas.height = exportQrSize;
+    const exportQrCtx = qrExportCanvas.getContext("2d");
+    const exportQrScale = exportQrSize / moduleCount;
+    for (let row = 0; row < moduleCount; row++) {
+      for (let col = 0; col < moduleCount; col++) {
+        exportQrCtx.fillStyle = generatedQrData.isDark(row, col) ? "#000000" : "#ffffff";
+        const px = Math.round(col * exportQrScale);
+        const py = Math.round(row * exportQrScale);
+        const pw = Math.round((col + 1) * exportQrScale) - px;
+        const ph = Math.round((row + 1) * exportQrScale) - py;
+        exportQrCtx.fillRect(px, py, pw, ph);
+      }
+    }
+
     // White background for QR area
     exportCtx.fillStyle = "white";
     exportCtx.fillRect(exportQrX, exportQrY, exportQrSize, exportQrSize);
 
-    // Disable smoothing for crisp QR
-    exportCtx.imageSmoothingEnabled = false;
-
-    // Draw QR code scaled to export size
-    exportCtx.drawImage(
-      generatedQrCanvas,
-      0, 0, generatedQrCanvas.width, generatedQrCanvas.height,
-      exportQrX, exportQrY, exportQrSize, exportQrSize
-    );
+    // Draw QR code at native export resolution
+    exportCtx.drawImage(qrExportCanvas, exportQrX, exportQrY);
   }
 
   return exportCanvas;
