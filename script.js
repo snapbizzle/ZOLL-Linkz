@@ -32,6 +32,8 @@ function getResourceLabel(subtype) {
       return "Education Resources";
     case "resourcelink":
       return "General Resources";
+    case "configuration":
+      return "Configuration Resources";
     default:
       return "Resources";
   }
