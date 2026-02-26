@@ -5,6 +5,9 @@ const BG_HEIGHT_PX = 522;
 let canvasWidthPx = BG_WIDTH_PX;
 let canvasHeightPx = BG_HEIGHT_PX;
 
+// Stores the most recently generated QR canvas for high-res export
+let generatedQrCanvas = null;
+
 // Get elements
 const urlInput = document.getElementById("urlInput");
 const generateBtn = document.getElementById("generateBtn");
@@ -205,6 +208,9 @@ generateBtn.addEventListener("click", () => {
   }
   ctxQr.putImageData(imageData, 0, 0);
 
+  // Save QR canvas for high-res export
+  generatedQrCanvas = qrCanvas;
+
   // Clear and draw background
   ctx.clearRect(0, 0, canvasWidthPx, canvasHeightPx);
   ctx.drawImage(bgImage, 0, 0, canvasWidthPx, canvasHeightPx);
@@ -222,7 +228,9 @@ generateBtn.addEventListener("click", () => {
 
 // Download flyer on button click
 downloadBtn.addEventListener("click", () => {
-  flyerCanvas.toBlob((blob) => {
+  if (!generatedQrCanvas) return;
+  const exportCanvas = createExportCanvas();
+  exportCanvas.toBlob((blob) => {
     if (blob) {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
@@ -234,6 +242,43 @@ downloadBtn.addEventListener("click", () => {
   }, "image/png");
 });
 
+// Creates an offscreen canvas rendered at the background image's native resolution
+function createExportCanvas() {
+  const exportCanvas = document.createElement("canvas");
+  const scaleX = bgImage.naturalWidth / BG_WIDTH_PX;
+  const scaleY = bgImage.naturalHeight / BG_HEIGHT_PX;
+  exportCanvas.width = bgImage.naturalWidth;
+  exportCanvas.height = bgImage.naturalHeight;
+  const exportCtx = exportCanvas.getContext("2d");
+
+  // Draw background at native resolution
+  exportCtx.drawImage(bgImage, 0, 0, bgImage.naturalWidth, bgImage.naturalHeight);
+
+  if (generatedQrCanvas) {
+    // Scale QR position and size to native resolution
+    const exportQrX = Math.round(QR_X_PX * scaleX);
+    const exportQrY = Math.round(QR_Y_PX * scaleY);
+    // Use average scale for the square QR size to stay proportional
+    const exportQrSize = Math.round(QR_SIZE_PX * ((scaleX + scaleY) / 2));
+
+    // White background for QR area
+    exportCtx.fillStyle = "white";
+    exportCtx.fillRect(exportQrX, exportQrY, exportQrSize, exportQrSize);
+
+    // Disable smoothing for crisp QR
+    exportCtx.imageSmoothingEnabled = false;
+
+    // Draw QR code scaled to export size
+    exportCtx.drawImage(
+      generatedQrCanvas,
+      0, 0, generatedQrCanvas.width, generatedQrCanvas.height,
+      exportQrX, exportQrY, exportQrSize, exportQrSize
+    );
+  }
+
+  return exportCanvas;
+}
+
 // Copy flyer to clipboard
 copyBtn.addEventListener("click", async () => {
   // Feature-detect Clipboard API support
@@ -243,9 +288,10 @@ copyBtn.addEventListener("click", async () => {
   }
 
   try {
-    // Convert canvas to blob
+    // Convert high-res export canvas to blob
     const blob = await new Promise((resolve, reject) => {
-      flyerCanvas.toBlob((blob) => {
+      const exportCanvas = createExportCanvas();
+      exportCanvas.toBlob((blob) => {
         if (blob) {
           resolve(blob);
         } else {
