@@ -20,6 +20,7 @@
     <button id="alsTestingBtn">Testing Resources</button>
     <button id="alsEducationBtn">Education Resources</button>
     <button id="alsGenericBtn">General Resources</button>
+    <button id="alsConfigBtn">Configuration Resources</button>
     <script>
       document.getElementById("alsVideoBtn").addEventListener("click", () => {
         window.location.href = "flyer.html?type=rseries-als-video";
@@ -37,6 +38,9 @@
         });
       document.getElementById("alsGenericBtn").addEventListener("click", () => {
         window.location.href = "flyer.html?type=rseries-als-resourcelink";
+      });
+      document.getElementById("alsConfigBtn").addEventListener("click", () => {
+        window.location.href = "flyer.html?type=rseries-als-configuration";
       });
     </script>
     <script src="pwa.js"></script>
