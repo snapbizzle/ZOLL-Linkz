@@ -17,6 +17,7 @@
     <button id="plusTestingBtn">Testing Resources</button>
     <button id="plusEducationBtn">Education Resources</button>
     <button id="plusGenericBtn">General Resources</button>
+    <button id="plusConfigBtn">Configuration Resources</button>
     <script>
       document.getElementById("plusVideoBtn").addEventListener("click", () => {
         window.location.href = "flyer.html?type=rseries-plus-video";
@@ -38,6 +39,11 @@
         .getElementById("plusGenericBtn")
         .addEventListener("click", () => {
           window.location.href = "flyer.html?type=rseries-plus-resourcelink";
+        });
+      document
+        .getElementById("plusConfigBtn")
+        .addEventListener("click", () => {
+          window.location.href = "flyer.html?type=rseries-plus-configuration";
         });
     </script>
     <script src="pwa.js"></script>
