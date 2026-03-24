@@ -229,6 +229,303 @@ input[type="url"]:focus {
   margin: 25px auto 0;
 }
 
+/* ── V2 Badge ─────────────────────────────── */
+.v2-badge {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--primary-color);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 12px;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+/* ── V2 Wizard Styles ─────────────────────── */
+.wizard-step {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.wizard-hint {
+  color: #555;
+  font-size: 0.95rem;
+  margin: 6px 0 18px;
+}
+
+/* Device selection grid */
+.device-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 0 auto;
+  max-width: 620px;
+}
+
+.device-btn {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Staff type grid */
+.staff-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.staff-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 200px;
+  min-height: 130px;
+  padding: 20px 16px;
+  font-size: 16px;
+  margin: 0;
+}
+
+.staff-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.staff-label {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.staff-desc {
+  font-size: 0.78rem;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+/* URL entry form */
+.url-entry-form {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.url-field-group {
+  margin-bottom: 18px;
+}
+
+.url-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+}
+
+.url-entry-form input[type="url"] {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* Back button row */
+.wizard-back-row {
+  margin-top: 18px;
+  text-align: left;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.back-btn {
+  background: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  font-size: 14px;
+  padding: 8px 16px;
+  min-width: auto;
+  box-shadow: none;
+}
+
+.back-btn:hover {
+  background: rgba(6, 117, 205, 0.08);
+  transform: none;
+  box-shadow: none;
+}
+
+.secondary-btn {
+  background: #6c757d;
+}
+
+.secondary-btn:hover {
+  background: #5a6268;
+}
+
+/* ── Flyer Preview (HTML card layout) ────────── */
+.flyer-preview-container {
+  max-width: 720px;
+  margin: 0 auto 8px;
+  border: 1px solid #dee2e6;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-hover);
+  background: #ffffff;
+}
+
+/* Header stripe */
+.fp-header {
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  gap: 16px;
+}
+
+.fp-logo {
+  width: 110px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.fp-header-text {
+  flex: 1;
+  text-align: center;
+}
+
+.fp-device-name {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.fp-staff-type {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+/* Cards row */
+.fp-cards {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: #f8f9fa;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.fp-card {
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: var(--border-radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+  flex: 1;
+  max-width: 300px;
+  box-shadow: var(--shadow);
+}
+
+.fp-qr-canvas {
+  display: block;
+  width: 180px;
+  height: 180px;
+  image-rendering: pixelated;
+}
+
+.fp-card-label {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.fp-card-link {
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  word-break: break-all;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.fp-card-link:hover {
+  background: rgba(6, 117, 205, 0.08);
+}
+
+/* Footer stripe */
+.fp-footer {
+  background-color: var(--primary-color);
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  padding: 8px;
+  font-size: 0.85rem;
+}
+
+/* ── V2 Try-it banner on home page ─────────────── */
+.v2-promo-banner {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #055baa 100%);
+  color: #ffffff;
+  border-radius: var(--border-radius);
+  padding: 20px 24px;
+  margin: 0 auto 20px;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: var(--shadow-hover);
+  flex-wrap: wrap;
+}
+
+.v2-promo-text {
+  flex: 1;
+  min-width: 180px;
+}
+
+.v2-promo-text strong {
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.v2-promo-text span {
+  font-size: 0.88rem;
+  opacity: 0.9;
+}
+
+.v2-promo-btn {
+  background: #ffffff;
+  color: var(--primary-color);
+  border: none;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 15px;
+  white-space: nowrap;
+  min-width: auto;
+  margin: 0;
+  box-shadow: none;
+  transition: var(--transition);
+}
+
+.v2-promo-btn:hover {
+  background: #f0f0f0;
+  transform: scale(1.04);
+  box-shadow: none;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .header {
@@ -294,5 +591,36 @@ input[type="url"]:focus {
   #copyBtn {
     width: 100%;
     margin: 5px 0;
+  }
+
+  /* V2 mobile overrides */
+  .device-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .staff-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .staff-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .fp-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .fp-card {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .v2-promo-banner {
+    flex-direction: column;
+    text-align: center;
   }
 }
