@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZOLL-Linkz v2 – QR Flyer Generator</title>
+    <meta
+      name="description"
+      content="Generate dual-QR code flyers for ZOLL product resources"
+    />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="apple-touch-icon" href="logo-zoll-w.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <img src="logo-zoll-w.png" alt="ZOLL Logo" class="header-logo" />
+      <span class="v2-badge">v2</span>
+    </header>
+
+    <!-- Breadcrumb / progress -->
+    <nav class="breadcrumb" id="breadcrumb">
+      <a href="index.html">Home</a> &gt; QR Flyer Generator v2
+    </nav>
+
+    <!-- ── Step 1: Device Selection ── -->
+    <section id="step1" class="wizard-step">
+      <h1 class="flyer-title">Select Your Device</h1>
+      <p class="wizard-hint">Choose the ZOLL device you want to create a flyer for.</p>
+      <div class="device-grid">
+        <button class="device-btn" data-device="rseries-plus">R Series PLUS</button>
+        <button class="device-btn" data-device="rseries-als">R Series ALS</button>
+        <button class="device-btn" data-device="xseries">X Series</button>
+        <button class="device-btn" data-device="autopulsenxt">AutoPulse NXT</button>
+        <button class="device-btn" data-device="aed3bls">AED 3 BLS</button>
+        <button class="device-btn" data-device="aedplus">AED Plus</button>
+        <button class="device-btn" data-device="zenix">Zenix</button>
+        <button class="device-btn" data-device="accessories">Accessories &amp; Consumables</button>
+      </div>
+    </section>
+
+    <!-- ── Step 2: Staff Type Selection ── -->
+    <section id="step2" class="wizard-step" style="display: none">
+      <h1 class="flyer-title">Select Staff Type</h1>
+      <p class="wizard-hint">
+        Who will be using this flyer? This determines which resource links are requested.
+      </p>
+      <div class="staff-grid">
+        <button class="staff-btn" data-staff="clinical" id="clinicalBtn">
+          <span class="staff-icon">🩺</span>
+          <span class="staff-label">Clinical Staff</span>
+          <span class="staff-desc">Education &amp; Testing links</span>
+        </button>
+        <button class="staff-btn" data-staff="biomed" id="biomedBtn">
+          <span class="staff-icon">🔧</span>
+          <span class="staff-label">BioMed Staff</span>
+          <span class="staff-desc">BioMed &amp; Configuration links</span>
+        </button>
+      </div>
+      <div class="wizard-back-row">
+        <button class="back-btn" id="backToStep1">&#8592; Back</button>
+      </div>
+    </section>
+
+    <!-- ── Step 3: URL Entry ── -->
+    <section id="step3" class="wizard-step" style="display: none">
+      <h1 class="flyer-title">Enter Resource Links</h1>
+      <p class="wizard-hint">
+        Paste the two resource URLs below. A QR code will be generated for each.
+      </p>
+      <div class="url-entry-form">
+        <div class="url-field-group">
+          <label class="url-label" id="urlLabel1" for="urlInput1">Resource Link 1</label>
+          <input
+            type="url"
+            id="urlInput1"
+            placeholder="https://..."
+            autocomplete="off"
+            required
+          />
+        </div>
+        <div class="url-field-group">
+          <label class="url-label" id="urlLabel2" for="urlInput2">Resource Link 2</label>
+          <input
+            type="url"
+            id="urlInput2"
+            placeholder="https://..."
+            autocomplete="off"
+            required
+          />
+        </div>
+        <div class="button-container">
+          <button id="generateBtn">Generate Flyer</button>
+        </div>
+      </div>
+      <div class="wizard-back-row">
+        <button class="back-btn" id="backToStep2">&#8592; Back</button>
+      </div>
+    </section>
+
+    <!-- ── Step 4: Flyer Preview ── -->
+    <section id="step4" class="wizard-step" style="display: none">
+      <h1 class="flyer-title">Your QR Flyer</h1>
+
+      <!-- HTML preview (shown on screen with clickable links) -->
+      <div id="flyerPreview" class="flyer-preview-container">
+        <div class="fp-header">
+          <img src="logo-zoll-w.png" alt="ZOLL" class="fp-logo" />
+          <div class="fp-header-text">
+            <div class="fp-device-name" id="fpDeviceName"></div>
+            <div class="fp-staff-type" id="fpStaffType"></div>
+          </div>
+        </div>
+        <div class="fp-cards">
+          <div class="fp-card" id="fpCard1">
+            <canvas id="qrCanvas1" class="fp-qr-canvas"></canvas>
+            <div class="fp-card-label" id="fpLabel1"></div>
+            <a class="fp-card-link" id="fpLink1" href="#" target="_blank" rel="noopener noreferrer">Open Link</a>
+          </div>
+          <div class="fp-card" id="fpCard2">
+            <canvas id="qrCanvas2" class="fp-qr-canvas"></canvas>
+            <div class="fp-card-label" id="fpLabel2"></div>
+            <a class="fp-card-link" id="fpLink2" href="#" target="_blank" rel="noopener noreferrer">Open Link</a>
+          </div>
+        </div>
+        <div class="fp-footer">zoll.com</div>
+      </div>
+
+      <!-- Hidden canvas used for PNG export -->
+      <canvas id="exportCanvas" style="display: none"></canvas>
+
+      <div class="button-container" style="margin-top: 16px">
+        <button id="downloadBtn">&#8595; Download Flyer</button>
+        <button id="copyBtn">&#128203; Copy to Clipboard</button>
+        <button id="resetBtn" class="secondary-btn">&#8635; Start Over</button>
+      </div>
+
+      <div class="wizard-back-row">
+        <button class="back-btn" id="backToStep3">&#8592; Back</button>
+      </div>
+    </section>
+
+    <script src="qrcode.min.js"></script>
+    <script src="v2-script.js"></script>
+    <script src="pwa.js"></script>
+  </body>
+</html>
